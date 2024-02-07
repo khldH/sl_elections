@@ -1,14 +1,9 @@
-import os
-
 from dotenv import load_dotenv
-
 from config import get_client
 from datetime import datetime
 import tweepy
 
 load_dotenv()
-
-client = get_client()
 
 
 def format_number(number):
@@ -33,15 +28,17 @@ def format_number(number):
 
 
 if __name__ == "__main__":
+    client = get_client()
+
     days = str((datetime.today() - datetime(1991, 5, 18)).days)
-    # days_since = days[:2] + ',' + days[2:]
-    formatted_number = format_number(days)
-    tweet = f'Days without recognition \n\n {formatted_number}\n\n #Somaliland'
+    days_since = days[:2] + ',' + days[2:]
 
-    # try:
-    print(client.get_me())
-    client.create_tweet(text=tweet)
-    print("Tweet posted successfully:")
+    format_days = format_number(days)
+    tweet = f'Days without recognition \n\n {format_days}\n\n #Somaliland'
+    try:
 
-    # except Exception as e:
-    #     print(e)
+        client.create_tweet(text=tweet)
+        print("Tweet posted successfully:")
+
+    except tweepy.errors.TweepyException as e:
+        print(f"Error: {e.response.text}")
