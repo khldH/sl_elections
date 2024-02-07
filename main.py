@@ -38,9 +38,9 @@ if __name__ == "__main__":
     formatted_number = format_number(days)
     tweet = f'Days without recognition \n\n {formatted_number}\n\n #Somaliland'
 
-    try:
-        client.create_tweet(text=tweet)
-        print("Tweet posted successfully:")
+    # try:
+    client.create_tweet(text=tweet)
+    print("Tweet posted successfully:")
 
-    except Exception as e:
-        print(e)
+    # except Exception as e:
+    #     print(e)
