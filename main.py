@@ -39,6 +39,7 @@ if __name__ == "__main__":
     tweet = f'Days without recognition \n\n {formatted_number}\n\n #Somaliland'
 
     # try:
+    print(client.get_me())
     client.create_tweet(text=tweet)
     print("Tweet posted successfully:")
 
