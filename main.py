@@ -30,11 +30,25 @@ def format_number(number):
 if __name__ == "__main__":
     client = get_client()
 
+    today = datetime.today()
+
     days = str((datetime.today() - datetime(1991, 5, 18)).days)
     days_since = days[:2] + ',' + days[2:]
 
     format_days = format_number(days)
-    tweet = f'Days without recognition \n\n {format_days}\n\n #Somaliland'
+    # tweet = f'Days without recognition \n\n {format_days}\n\n #Somaliland'
+
+    if today.day == 18 and today.month == 5:
+        tweet = 'Happy independence day #Somaliland, here is a little stat for you\n\n '
+        tweet += f'Without recognition: \n\n'
+        tweet += f'Days \n\n {format_days}\n\n'
+        tweet += f'Weeks  \n\n {format_number(str((datetime.today() - datetime(1991, 5, 18)).days // 7))}\n\n'
+        tweet += f'Months \n\n {format_number(str((datetime.today() - datetime(1991, 5, 18)).days // 30))}\n\n'
+        tweet += f'Years \n\n {format_number(str((datetime.today() - datetime(1991, 5, 18)).days // 365))}\n\n'
+        tweet += f'#Somaliland #18May{datetime.today().year}'
+    else:
+        tweet = f'Days without recognition \n\n {format_days}\n\n #Somaliland'
+
     try:
 
         client.create_tweet(text=tweet)
